@@ -1,70 +1,74 @@
 @extends('admin.layouts.master')
+
 @section('title', 'Edit Pandit')
 @section('page-title', 'Edit Pandit')
 
 @section('content')
 
-@if(session('success'))
-    <div class="alert alert-success">{{ session('success') }}</div>
-@endif
+<div class="card">
+    <div class="card-body">
+        <form action="{{ route('pandits.update', $pandit->id) }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
 
-<form action="{{ route('pandits.update', $pandit->id) }}" method="POST" enctype="multipart/form-data">
-    @csrf
-    @method('PUT')
-
-    <div class="card">
-        <div class="card-body">
-
-            <div class="mb-3">
-                <label>Name</label>
-                <input type="text" name="name" class="form-control" value="{{ old('name', $pandit->name) }}" required>
-                @error('name') <small class="text-danger">{{ $message }}</small> @enderror
-            </div>
-
-            <div class="mb-3">
-                <label>Experience</label>
-                <input type="text" name="experience" class="form-control" value="{{ old('experience', $pandit->experience) }}">
-                @error('experience') <small class="text-danger">{{ $message }}</small> @enderror
-            </div>
-
-            <div class="mb-3">
-                <label>Bio</label>
-                <textarea name="bio" class="form-control" rows="3">{{ old('bio', $pandit->bio) }}</textarea>
-                @error('bio') <small class="text-danger">{{ $message }}</small> @enderror
-            </div>
-
-            <div class="mb-3">
-                <label>Image</label>
-                <input type="file" name="image" class="form-control" accept="image/*" onchange="previewImage(event)">
-                @error('image') <small class="text-danger">{{ $message }}</small> @enderror
-
-                @if($pandit->image)
-                <div class="mt-2">
-                    <strong>Current Image:</strong><br>
-                    <img src="{{ asset('storage/' . $pandit->image) }}" id="preview" alt="Pandit Image" style="max-height: 150px;" class="img-thumbnail">
+            <div class="row g-3">
+                <div class="col-md-6">
+                    <label>Name *</label>
+                    <input type="text" name="name" class="form-control" value="{{ $pandit->name }}" required>
                 </div>
-                @else
-                <div class="mt-2">
-                    <img id="preview" style="max-height: 150px; display: none;" class="img-thumbnail" />
+
+                <div class="col-md-6">
+                    <label>Email</label>
+                    <input type="email" name="email" class="form-control" value="{{ $pandit->email }}">
                 </div>
-                @endif
+
+                <div class="col-md-6">
+                    <label>Phone</label>
+                    <input type="text" name="phone" class="form-control" value="{{ $pandit->phone }}">
+                </div>
+
+                <div class="col-md-6">
+                    <label>Current Image</label><br>
+                    @if($pandit->image)
+                        <img src="{{ asset('storage/' . $pandit->image) }}" width="100" class="mb-2">
+                    @else
+                        <small>No image</small>
+                    @endif
+                    <input type="file" name="image" class="form-control mt-2">
+                </div>
+
+                <div class="col-12">
+                    <label>Bio</label>
+                    <textarea name="bio" class="form-control" rows="3">{{ $pandit->bio }}</textarea>
+                </div>
+
+                <div class="col-md-6">
+                    <label>Facebook</label>
+                    <input type="url" name="facebook" class="form-control" value="{{ $pandit->facebook }}">
+                </div>
+
+                <div class="col-md-6">
+                    <label>Instagram</label>
+                    <input type="url" name="instagram" class="form-control" value="{{ $pandit->instagram }}">
+                </div>
+
+                <div class="col-md-6">
+                    <label>Twitter</label>
+                    <input type="url" name="twitter" class="form-control" value="{{ $pandit->twitter }}">
+                </div>
+
+                <div class="col-md-6">
+                    <label>YouTube</label>
+                    <input type="url" name="youtube" class="form-control" value="{{ $pandit->youtube }}">
+                </div>
+
+                <div class="col-12 text-end mt-3">
+                    <button class="btn btn-success">Update Pandit</button>
+                </div>
             </div>
 
-            <button type="submit" class="btn btn-primary">Update</button>
-            <a href="{{ route('pandits.index') }}" class="btn btn-secondary">Cancel</a>
-
-        </div>
+        </form>
     </div>
-</form>
+</div>
 
-@endsection
-
-@section('scripts')
-<script>
-    function previewImage(event) {
-        const preview = document.getElementById('preview');
-        preview.src = URL.createObjectURL(event.target.files[0]);
-        preview.style.display = 'block';
-    }
-</script>
 @endsection

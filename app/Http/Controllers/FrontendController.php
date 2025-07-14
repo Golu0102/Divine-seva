@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pandit;
 use App\Models\Pooja;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -13,8 +14,25 @@ class FrontendController extends Controller
     public function index()
     {
         $poojas = Pooja::with('pandit')->where('is_active', true)->get();
-        return view('frontend.index', compact('poojas'));
+        $pandits = Pandit::all();
+        return view('frontend.index', compact('poojas', 'pandits'));
     }
+
+    public function allPoojas()
+    {
+        $poojas = Pooja::with('pandit')->latest()->get();
+        return view('frontend.all-poojas', compact('poojas'));
+    }
+
+    public function bookForm()
+    {
+        $poojas = Pooja::where('is_active', '1')->get();
+        $pandits = Pandit::all();
+
+        return view('frontend.book-pooja', compact('poojas', 'pandits'));
+    }
+
+
 
     public function view($id)
     {

@@ -11,6 +11,6 @@ class Pooja extends Model
 
     public function pandit()
     {
-        return $this->belongsTo(Pandit::class);
+        return $this->belongsTo(Pandit::class, 'pandit_id');
     }
 }

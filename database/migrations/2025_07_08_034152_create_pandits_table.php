@@ -14,8 +14,13 @@ return new class extends Migration
         Schema::create('pandits', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('experience')->nullable();
+            $table->string('email')->nullable();
+            $table->string('phone')->nullable();
             $table->text('bio')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('instagram')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('youtube')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();
         });

@@ -36,13 +36,17 @@ return [
     */
 
     'guards' => [
+        'superadmin' => [
+            'driver' => 'session',
+            'provider' => 'superadmins',
+        ],
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'admins',
+        ],
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
-        ],
-        'admin' => [ // ✅ custom admin guard
-            'driver' => 'session',
-            'provider' => 'admins',
         ],
     ],
 
@@ -64,20 +68,18 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'superadmins' => [
             'driver' => 'eloquent',
-            'model' => env('AUTH_MODEL', App\Models\User::class),
+            'model' => App\Models\Superadmin::class,
         ],
-
-        'admins' => [ // ✅ admin provider
+        'admins' => [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'users' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\User::class,
+        ],
     ],
 
     /*
@@ -100,6 +102,19 @@ return [
     */
 
     'passwords' => [
+        'superadmins' => [
+            'provider' => 'superadmins',
+            'table' => 'superadmin_password_resets', // or custom table
+            'expire' => 60,
+            'throttle' => 60,
+            'url' => '/superadmin/password/reset/{token}',
+        ],
+        'admins' => [
+            'provider' => 'admins',
+            'table' => 'admin_password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
         'users' => [
             'provider' => 'users',
             'table' => env('AUTH_PASSWORD_RESET_TOKEN_TABLE', 'password_reset_tokens'),
@@ -107,6 +122,7 @@ return [
             'throttle' => 60,
         ],
     ],
+
 
     /*
     |--------------------------------------------------------------------------

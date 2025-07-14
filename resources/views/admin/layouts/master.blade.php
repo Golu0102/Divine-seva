@@ -39,27 +39,28 @@
         <ul class="sidebar-nav" id="sidebar-nav">
             <li class="nav-item">
                 <a class="nav-link {{ request()->is('admin/dashboard') ? '' : 'collapsed' }}"
-                    href="{{ route('admin.dashboard') }}">
+                   href="{{ route('admin.dashboard') }}">
                     <i class="bi bi-grid"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
-            <!-- Pandits -->
             <li class="nav-item">
                 <a class="nav-link {{ request()->is('admin/pandits*') ? '' : 'collapsed' }}"
-                    href="{{ route('pandits.index') }}">
+                   href="{{ route('pandits.index') }}">
                     <i class="bi bi-person-lines-fill"></i>
                     <span>Pandits</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('poojas.index') }}">
+                <a class="nav-link {{ request()->is('admin/poojas*') ? '' : 'collapsed' }}"
+                   href="{{ route('poojas.index') }}">
                     <i class="bi bi-journal-bookmark"></i>
                     <span>Poojas</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" href="{{ route('admin.bookings') }}">
+                <a class="nav-link {{ request()->is('admin/bookings*') ? '' : 'collapsed' }}"
+                   href="{{ route('admin.bookings') }}">
                     <i class="bi bi-card-checklist"></i>
                     <span>Bookings</span>
                 </a>
@@ -68,9 +69,55 @@
     </aside>
 
     <main id="main" class="main">
+
+        {{-- ======= Page Title & Breadcrumb ======= --}}
+        <div class="pagetitle">
+            <h1>@yield('page-title', 'Dashboard')</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a href="{{ route('admin.dashboard') }}">Home</a>
+                    </li>
+                    @php
+                        $segments = Request::segments();
+                        $url = '';
+                    @endphp
+                    @foreach ($segments as $index => $segment)
+                        @php $url .= '/' . $segment; @endphp
+                        @if (is_numeric($segment) && isset($breadcrumbItem))
+                            <li class="breadcrumb-item active">{{ $breadcrumbItem }}</li>
+                        @elseif ($loop->last)
+                            <li class="breadcrumb-item active">{{ ucfirst(str_replace('-', ' ', $segment)) }}</li>
+                        @else
+                            <li class="breadcrumb-item">
+                                <a href="{{ url($url) }}">{{ ucfirst(str_replace('-', ' ', $segment)) }}</a>
+                            </li>
+                        @endif
+                    @endforeach
+                </ol>
+            </nav>
+        </div>
+
+        {{-- ======= Flash Alert Messages ======= --}}
+        @if (session('success'))
+            <div class="alert alert-success alert-dismissible fade show">
+                {{ session('success') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        @endif
+
+        @if (session('error'))
+            <div class="alert alert-danger alert-dismissible fade show">
+                {{ session('error') }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        @endif
+
+        {{-- ======= Page Content ======= --}}
         @yield('content')
     </main>
 
+    <!-- ======= Footer ======= -->
     <footer id="footer" class="footer">
         <div class="copyright">
             &copy; {{ date('Y') }} <strong>Pooja Booking Admin</strong>. All Rights Reserved
