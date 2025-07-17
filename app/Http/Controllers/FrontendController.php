@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Feedback;
 use App\Models\Pandit;
 use App\Models\Pooja;
 use Illuminate\Http\Request;
@@ -15,7 +16,8 @@ class FrontendController extends Controller
     {
         $poojas = Pooja::with('pandit')->where('is_active', true)->get();
         $pandits = Pandit::all();
-        return view('frontend.index', compact('poojas', 'pandits'));
+        $feedbacks = Feedback::with('booking')->latest()->take(6)->get();
+        return view('frontend.index', compact('poojas', 'pandits', 'feedbacks'));
     }
 
     public function allPoojas()

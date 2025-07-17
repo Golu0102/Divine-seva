@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\Auth\AdminAuthController;
 use App\Http\Controllers\Admin\PoojaController;
 use App\Http\Controllers\Admin\BookingController as AdminBookingController;
 use App\Http\Controllers\Admin\PanditController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\Superadmin\SiteSettingsController;
 use App\Http\Controllers\Superadmin\SuperadminAuthController;
 
@@ -39,6 +40,11 @@ Route::get('/services', [FrontendController::class, 'services'])->name('services
 // Contact page
 Route::get('/contact', fn() => view('frontend.contact'))->name('contact');
 Route::post('/contact', [FrontendController::class, 'submitContact'])->name('contact.submit');
+
+// Feedback page
+Route::get('/feedback/{booking}', [FeedbackController::class, 'showForm']);
+Route::post('/feedback/{booking}', [FeedbackController::class, 'submit']);
+
 
 
 /*

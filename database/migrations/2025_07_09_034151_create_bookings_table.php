@@ -17,6 +17,7 @@ return new class extends Migration
             $table->decimal('amount', 10, 2)->default(0);
             $table->string('name');
             $table->string('mobile');
+            $table->string('email');
             $table->text('address');
             $table->date('date');
             $table->time('time');

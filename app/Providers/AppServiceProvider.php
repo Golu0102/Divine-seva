@@ -21,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        View::composer(['frontend.partials.navbar', 'frontend.partials.footer', 'frontend.index'], function ($view) {
+        View::composer(['frontend.partials.navbar', 'frontend.partials.footer', 'frontend.index', 'emails.booking'], function ($view) {
             $view->with('setting', SiteSetting::first());
         });
     }

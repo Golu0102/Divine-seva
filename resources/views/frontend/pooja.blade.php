@@ -51,6 +51,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <input name="name" type="text" class="form-input w-full p-3 border border-gray-300 rounded-lg" placeholder="Your Name" required>
                 <input name="mobile" type="text" class="form-input w-full p-3 border border-gray-300 rounded-lg" placeholder="Mobile Number" required>
+                <input name="email" type="email" class="form-input w-full p-3 border border-gray-300 rounded-lg" placeholder="Email Address" required>
             </div>
 
             <textarea name="address" rows="3" class="form-textarea w-full p-3 border border-gray-300 rounded-lg" placeholder="Your Full Address" required></textarea>

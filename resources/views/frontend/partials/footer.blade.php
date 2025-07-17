@@ -28,6 +28,10 @@
                         <a href="{{ $setting->youtube }}" target="_blank" class="text-gray-300 hover:text-brand-orange"><i
                                 data-lucide="youtube"></i></a>
                     @endif
+                    @if ($setting->twitter)
+                        <a href="{{ $setting->twitter }}" target="_blank" class="text-gray-300 hover:text-brand-orange"><i
+                                data-lucide="twitter"></i></a>
+                    @endif
                 </div>
             </div>
 

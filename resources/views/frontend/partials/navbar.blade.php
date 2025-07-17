@@ -17,7 +17,7 @@
 
             <!-- Desktop Navigation -->
             <nav class="hidden md:flex items-center space-x-8">
-                <a href="{{ url('/') }}#home"
+                <a href="{{ url('/') }}"
                     class="text-gray-600 hover:text-brand-orange transition duration-300">Home</a>
                 <a href="{{ url('/') }}#services"
                     class="text-gray-600 hover:text-brand-orange transition duration-300">Poojas</a>

@@ -56,6 +56,14 @@
                     placeholder="10-digit number" required>
             </div>
 
+            <!-- Email -->
+            <div class="mb-4">
+                <label class="block font-medium text-brand-maroon">Email</label>
+                <input type="email" name="email"
+                    class="mt-1 block w-full rounded-md border border-brand-maroon bg-amber-50 text-brand-maroon placeholder-gray-500 focus:ring-brand-orange focus:border-brand-orange shadow-sm p-2"
+                    placeholder="Email Address" required>
+            </div>
+
             <!-- Address -->
             <div class="mb-4">
                 <label class="block font-medium text-brand-maroon">Address</label>
@@ -83,7 +91,7 @@
 
             <div class="text-center mt-6">
                 <button type="submit"
-                    class="bg-brand-orange text-white font-semibold px-6 py-2 rounded-md hover:bg-opacity-90 transition">Confirm
+                    class="bg-brand-orange text-white font-semibold px-6 py-2 rounded-md hover:bg-opacity-90 transition cursor-pointer">Confirm
                     Booking</button>
             </div>
             <script>

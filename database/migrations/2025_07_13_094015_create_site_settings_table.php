@@ -11,6 +11,7 @@ return new class extends Migration {
             $table->id();
             $table->string('site_name')->nullable();
             $table->string('logo')->nullable();             // Logo image path
+            $table->string('experienced_pandit_image')->nullable();
             $table->string('footer_text')->nullable();      // Footer copyright or message
             $table->string('address')->nullable();          // Address
             $table->string('email')->nullable();            // Contact email
@@ -24,6 +25,17 @@ return new class extends Migration {
             $table->text('blog_3')->nullable();
             $table->text('blog_4')->nullable();
             $table->text('blog_5')->nullable();
+            $table->string('slider_image_1')->nullable();
+            $table->string('slider_image_2')->nullable();
+            $table->string('slider_image_3')->nullable();
+
+            $table->string('slider_heading_1')->nullable();
+            $table->string('slider_heading_2')->nullable();
+            $table->string('slider_heading_3')->nullable();
+
+            $table->text('slider_subheading_1')->nullable();
+            $table->text('slider_subheading_2')->nullable();
+            $table->text('slider_subheading_3')->nullable();
             $table->timestamps();
         });
     }

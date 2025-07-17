@@ -16,10 +16,16 @@
                     <label>Site Logo</label><br>
                     @if ($setting->logo)
                         <img src="{{ asset($setting->logo) }}" alt="Logo" height="80">
+                        <div class="form-check mt-2">
+                            <input class="form-check-input" type="checkbox" name="delete_logo" value="1"
+                                id="delete_logo">
+                            <label class="form-check-label" for="delete_logo">Delete current logo</label>
+                        </div>
                     @endif
 
-                    <input type="file" name="logo" class="form-control">
+                    <input type="file" name="logo" class="form-control mt-2">
                 </div>
+
 
                 <!-- Footer Text -->
                 <div class="col-md-6 mb-3">
@@ -98,6 +104,49 @@
                     <label for="blog_7" class="form-label">Blog 7</label>
                     <textarea class="form-control" name="blog_7">{{ old('blog_7', $setting->blog_7) }}</textarea>
                 </div>
+
+                <div class="col-md-6 mb-3">
+                    <label>Experienced Pandit Image</label><br>
+
+                    @if ($setting->experienced_pandit_image)
+                        <img src="{{ asset($setting->experienced_pandit_image) }}" alt="Experienced Pandit"
+                            height="80">
+                        <div class="form-check mt-2">
+                            <input class="form-check-input" type="checkbox" name="delete_experienced_pandit_image"
+                                value="1" id="delete_experienced_pandit_image">
+                            <label class="form-check-label" for="delete_experienced_pandit_image">Delete current
+                                image</label>
+                        </div>
+                    @endif
+
+                    <input type="file" name="experienced_pandit_image" class="form-control mt-2">
+                </div>
+
+
+
+                @for ($i = 1; $i <= 3; $i++)
+                    <div class="mb-3">
+                        <label for="slider_image_{{ $i }}" class="form-label">Slider Image
+                            {{ $i }}</label><br>
+                        @if (!empty($setting->{'slider_image_' . $i}))
+                            <img src="{{ asset($setting->{'slider_image_' . $i}) }}" height="100" class="mb-2">
+                        @endif
+                        <input type="file" name="slider_image_{{ $i }}" class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="slider_heading_{{ $i }}" class="form-label">Slider Heading
+                            {{ $i }}</label>
+                        <input type="text" class="form-control" name="slider_heading_{{ $i }}"
+                            value="{{ old("slider_heading_$i", $setting->{'slider_heading_' . $i}) }}">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="slider_subheading_{{ $i }}" class="form-label">Slider Subheading
+                            {{ $i }}</label>
+                        <textarea class="form-control" name="slider_subheading_{{ $i }}">{{ old("slider_subheading_$i", $setting->{'slider_subheading_' . $i}) }}</textarea>
+                    </div>
+                @endfor
 
             </div>
             <button class="btn btn-primary w-100">Save Settings</button>

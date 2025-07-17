@@ -6,13 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'Divine Seva')</title>
 
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-
     <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Laila:wght@500;700&display=swap"
         rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Font Awesome CDN -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
 
     <style>
         body {
@@ -56,6 +55,82 @@
             display: none;
         }
     </style>
+    <!-- Floating Call & WhatsApp Buttons -->
+    <style>
+        .floating-button {
+            position: fixed;
+            bottom: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            animation: pulse 2s infinite;
+        }
+
+        .call-button {
+            left: 20px;
+            background-color: #ff5722;
+            color: #fff;
+        }
+
+        .whatsapp-button {
+            right: 20px;
+            background-color: #25d366;
+            color: #fff;
+        }
+
+        .floating-tooltip {
+            position: absolute;
+            top: -35px;
+            white-space: nowrap;
+            background-color: #fff;
+            color: #000;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 13px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+
+        .floating-button:hover .floating-tooltip {
+            display: block;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.4);
+            }
+
+            70% {
+                transform: scale(1.05);
+                box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+            }
+
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .floating-button {
+                width: 60px;
+                height: 60px;
+                font-size: 20px;
+            }
+
+            .floating-tooltip {
+                font-size: 12px;
+                padding: 3px 8px;
+            }
+        }
+    </style>
 
     @stack('styles')
 </head>
@@ -71,7 +146,6 @@
 
     <!-- Footer -->
     @include('frontend.partials.footer')
-
     <script>
         // Mobile Menu Toggle
         const toggle = document.getElementById('mobile-menu-button');
@@ -94,10 +168,13 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const wrapper = document.getElementById('carousel-wrapper');
-
-            let scrollX = 0;
-            const speed = 0.5;
+            const scrollAmount = 1; // pixels per frame
             let isPaused = false;
+
+            // Duplicate the scroll items once to enable seamless loop
+            if (wrapper.children.length > 0) {
+                wrapper.innerHTML += wrapper.innerHTML;
+            }
 
             // Pause on hover
             wrapper.addEventListener('mouseenter', () => isPaused = true);
@@ -105,22 +182,21 @@
 
             function scrollLoop() {
                 if (!isPaused) {
-                    scrollX += speed;
+                    wrapper.scrollLeft += scrollAmount;
 
-                    if (scrollX >= wrapper.scrollWidth / 2) {
-                        scrollX = 0;
+                    // Reset scroll if we've scrolled through the first set
+                    if (wrapper.scrollLeft >= wrapper.scrollWidth / 2) {
                         wrapper.scrollLeft = 0;
                     }
-
-                    wrapper.scrollLeft = scrollX;
                 }
 
                 requestAnimationFrame(scrollLoop);
             }
 
-            requestAnimationFrame(scrollLoop);
+            scrollLoop();
         });
     </script>
+
     <script>
         document.querySelector('select[name="pooja_id"]').addEventListener('change', function() {
             const selectedId = this.value;
