@@ -20,14 +20,6 @@ Route::get('/debug', function () {
         return '❌ DB Error: ' . $e->getMessage();
     }
 
-Route::get('/setup', function () {
-    Artisan::call('key:generate');
-    Artisan::call('migrate', ['--force' => true]);
-    Artisan::call('storage:link');
-
-    return '✅ Setup complete. Ab /setup route ko delete kar do!';
-});
-
 /*
 |--------------------------------------------------------------------------
 | Public Routes (Customer Side)
