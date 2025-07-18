@@ -12,14 +12,6 @@ use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\Superadmin\SiteSettingsController;
 use App\Http\Controllers\Superadmin\SuperadminAuthController;
 
-Route::get('/debug', function () {
-    try {
-        DB::connection()->getPdo();
-        return '✅ DB connected successfully!';
-    } catch (\Exception $e) {
-        return '❌ DB Error: ' . $e->getMessage();
-    }
-
 /*
 |--------------------------------------------------------------------------
 | Public Routes (Customer Side)
