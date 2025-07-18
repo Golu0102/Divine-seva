@@ -12,11 +12,6 @@ use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\Superadmin\SiteSettingsController;
 use App\Http\Controllers\Superadmin\SuperadminAuthController;
 
-
-Route::get('/', function () {
-    return '✅ Home working (plain)';
-});
-
 /*
 |--------------------------------------------------------------------------
 | Public Routes (Customer Side)
