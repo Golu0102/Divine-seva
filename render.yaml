@@ -4,6 +4,8 @@ services:
     env: docker
     plan: free
     dockerfilePath: ./Dockerfile
+    preDeployCommand: "php artisan migrate --force"
+    startCommand: "php artisan serve --host=0.0.0.0 --port=10000"
     envVars:
       - key: APP_ENV
         value: production
@@ -13,6 +15,8 @@ services:
         value: false
       - key: APP_URL
         value: https://divine-seva.onrender.com
+
+      # ✅ DB ENV
       - key: DB_CONNECTION
         value: pgsql
       - key: DB_HOST
@@ -25,3 +29,31 @@ services:
         value: divine_seve_db_user
       - key: DB_PASSWORD
         value: 9lf2xmNgR9q8KoeRshqlVpOAoJZQON4L
+
+      # ✅ SESSION
+      - key: SESSION_DRIVER
+        value: file
+
+      # ✅ QUEUE / CACHE
+      - key: QUEUE_CONNECTION
+        value: database
+      - key: CACHE_STORE
+        value: database
+
+      # ✅ MAIL (optional)
+      - key: MAIL_MAILER
+        value: smtp
+      - key: MAIL_HOST
+        value: smtp.gmail.com
+      - key: MAIL_PORT
+        value: "587"
+      - key: MAIL_USERNAME
+        value: goludivya10@gmail.com
+      - key: MAIL_PASSWORD
+        value: joadmciynqlldzwx
+      - key: MAIL_ENCRYPTION
+        value: tls
+      - key: MAIL_FROM_ADDRESS
+        value: goludivya10@gmail.com
+      - key: MAIL_FROM_NAME
+        value: Divine Seva
