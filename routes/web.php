@@ -13,14 +13,10 @@ use App\Http\Controllers\Superadmin\SiteSettingsController;
 use App\Http\Controllers\Superadmin\SuperadminAuthController;
 
 
-Route::get('/ping', function () {
-    try {
-        DB::connection()->getPdo();
-        return '✅ DB connected and Laravel reachable';
-    } catch (\Exception $e) {
-        return '❌ DB Error: ' . $e->getMessage();
-    }
+Route::get('/', function () {
+    return '✅ Home working (plain)';
 });
+
 /*
 |--------------------------------------------------------------------------
 | Public Routes (Customer Side)
