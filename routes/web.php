@@ -12,6 +12,14 @@ use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\Superadmin\SiteSettingsController;
 use App\Http\Controllers\Superadmin\SuperadminAuthController;
 
+Route::get('/setup', function () {
+    Artisan::call('key:generate');
+    Artisan::call('migrate', ['--force' => true]);
+    Artisan::call('storage:link');
+
+    return '✅ Setup complete. Ab /setup route ko delete kar do!';
+});
+
 /*
 |--------------------------------------------------------------------------
 | Public Routes (Customer Side)
