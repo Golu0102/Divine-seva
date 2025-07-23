@@ -5,6 +5,7 @@ services:
     plan: free
     dockerfilePath: ./Dockerfile
     preDeployCommand: "php artisan migrate --force"
+    buildCommand: "npm install && npm run build"
     startCommand: "php -S 0.0.0.0:8000 -t public"
     envVars:
       - key: APP_ENV
