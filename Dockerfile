@@ -17,29 +17,23 @@ WORKDIR /var/www
 # Copy project files
 COPY . .
 
-# Copy and prepare env
-RUN cp .env.example .env
+# Copy and prepare .env if needed (optional, for local builds only)
+# RUN cp .env.example .env
 
 # Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
 
-# Generate Laravel app key
-RUN php artisan key:generate
-
-# Run migrations
-RUN php artisan migrate --force
-
 # Install & build frontend assets
 RUN npm install && npm run build
 
-# Cache configuration
+# Cache Laravel configs
 RUN php artisan config:cache && php artisan route:cache && php artisan view:cache
 
-# Set proper permissions
+# Set permissions
 RUN chown -R www-data:www-data /var/www && chmod -R 755 /var/www
 
 # Expose port
 EXPOSE 8000
 
-# Serve Laravel app from the public directory
+# Start Laravel app
 CMD ["php", "-S", "0.0.0.0:8000", "-t", "public"]
