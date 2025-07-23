@@ -126,12 +126,12 @@
     <!-- Testimonials -->
     @include('frontend.sections.testimonials')
 
-    <a href="tel:{{ $setting->mobile }}" class="floating-button call-button">
+    <a href="tel:9393939393" class="floating-button call-button">
         <div class="floating-tooltip">Call us</div>
         <i class="fas fa-phone-alt"></i>
     </a>
 
-    <a href="https://wa.me/{{ $setting->mobile }}" class="floating-button whatsapp-button" target="_blank">
+    <a href="https://wa.me/9399393293" class="floating-button whatsapp-button" target="_blank">
         <div class="floating-tooltip">Chat on WhatsApp</div>
         <i class="fab fa-whatsapp"></i>
     </a>
